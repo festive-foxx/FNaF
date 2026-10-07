@@ -1,4 +1,6 @@
 const runtimecanvas = "resources/fnafw.cch";
+const MAX_CONCURRENT_DOWNLOADS = 4;
+
 const parts = 13;
 
 // -----------------
@@ -55,34 +57,27 @@ async function intercept() {
 }
 
 async function extract() {
-  const res = await fetch("resources.zip");
-
-  const contentLength = res.headers.get("Content-Length");
-  const total = parseInt(contentLength, 10);
-  const reader = res.body.getReader();
-  let loaded = 0;
-  const chunks = [];
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    chunks.push(value);
-    loaded += value.length;
-    updateProgress('download', Math.floor((loaded / total) * 100));
+  const response = await fetch("resources.zip");
+  if (!response.ok) {
+    throw new Error(`Failed to download resources.zip: ${response.status}`);
   }
 
-  const arrayBuffer = await new Blob(chunks).arrayBuffer();
-  const zip = await JSZip.loadAsync(arrayBuffer);
+  const archive = await response.arrayBuffer();
+  const zip = await JSZip.loadAsync(archive);
   const files = Object.keys(zip.files).filter(name => !zip.files[name].dir);
   const totalFiles = files.length;
 
-  for (let i = 0; i < totalFiles; i++) {
-    const file = zip.files[files[i]];
-    const blob = await file.async("blob");
-    const url = URL.createObjectURL(blob);
-    map.set(files[i], url);
-    updateProgress('extract', Math.floor(((i + 1) / totalFiles) * 100));
-  }
+  const next = async () => {
+    const file = files.shift();
+    if (!file) return;
+
+    const blob = await zip.files[file].async("blob");
+    map.set(file, URL.createObjectURL(blob));
+    updateProgress('extract', Math.floor(((totalFiles - files.length) / totalFiles) * 100));
+    await next();
+  };
+
+  await Promise.all(Array.from({ length: Math.min(MAX_CONCURRENT_DOWNLOADS, totalFiles) }, next));
 }
 
 async function wedone() {
@@ -101,40 +96,35 @@ async function wedone() {
 const originalFetch = window.fetch;
 
 function mergeFiles(fileParts) {
-  return new Promise((resolve, reject) => {
-      let buffers = [];
-      let totalSize = 0;
-      let loadedSize = 0;
-      Promise.all(fileParts.map(part =>
-          fetch(part, { method: 'HEAD' }).then(res => {
-              if (!res.ok) throw new Error("Missing part: " + part);
-              return parseInt(res.headers.get("Content-Length") || "0", 10);
-          })
-      )).then(sizes => {
-          totalSize = sizes.reduce((a, b) => a + b, 0);
-          function fetchPart(index) {
-              if (index >= fileParts.length) {
-                  let mergedBlob = new Blob(buffers);
-                  let mergedFileUrl = URL.createObjectURL(mergedBlob);
-                  resolve(mergedFileUrl);
-                  return;
-              }
+  let totalSize = 0;
+  let loadedSize = 0;
+  let nextIndex = 0;
+  const buffers = [];
 
-              fetch(fileParts[index]).then((response) => {
-                  if (!response.ok) throw new Error("Missing part: " + fileParts[index]);
-                  return response.arrayBuffer();
-              }).then((data) => {
-                  buffers.push(data);
-                  loadedSize += data.byteLength;
-                  updateProgress('download', Math.floor((loadedSize / totalSize) * 100));
-                  fetchPart(index + 1);
-              }).catch(reject);
-          }
+  const fetchNext = async () => {
+    if (nextIndex >= fileParts.length) return;
 
-          fetchPart(0);
-      }).catch(reject);
-  });
+    const index = nextIndex++;
+    const part = fileParts[index];
+    const response = await fetch(part);
+    if (!response.ok) throw new Error("Missing part: " + part);
+
+    const partSize = parseInt(response.headers.get('Content-Length') || '0', 10) || 0;
+    totalSize += partSize;
+    const buffer = await response.arrayBuffer();
+    const bytes = buffer.byteLength || partSize;
+    buffers[index] = buffer;
+    loadedSize += bytes;
+    updateProgress('download', Math.floor((loadedSize / Math.max(totalSize, bytes)) * 100));
+    await fetchNext();
+  };
+
+  return Promise.all(
+    Array.from({ length: Math.min(MAX_CONCURRENT_DOWNLOADS, fileParts.length) }, fetchNext)
+  ).then(() => URL.createObjectURL(new Blob(buffers)));
 }
+
+
 
 function getParts(file, start, end) {
     let parts = [];
