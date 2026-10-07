@@ -3,21 +3,21 @@
 <hr>
 
 # Demos
-Click [here](http://festive-foxx.github.io/fnaf-web/fnaf/1/) for FNAF 1!<br>
+Click [here](https://fnaf-p9rm.onrender.com/1/) for FNAF 1!<br>
 
-Click [here](http://festive-foxx.github.io/fnaf-web/fnaf/2/) for FNAF 2!<br>
+Click [here](https://fnaf-p9rm.onrender.com/2/) for FNAF 2!<br>
 
-Click [here](http://festive-foxx.github.io/fnaf-web/fnaf/3/) for FNAF 3!<br>
+Click [here](https://fnaf-p9rm.onrender.com/3/) for FNAF 3!<br>
 
-Click [here](http://festive-foxx.github.io/fnaf-web/fnaf/4/) for FNAF 4!<br>
+Click [here](https://fnaf-p9rm.onrender.com/4/) for FNAF 4!<br>
 
-Click [here](http://festive-foxx.github.io/fnaf-web/fnaf/w/) for FNAF World!<br>
+Click [here](https://fnaf-p9rm.onrender.com/w/) for FNAF World!<br>
 
-Click [here](http://festive-foxx.github.io/fnaf-web/fnaf/ps/) for FNAF Pizzeria Simulator!<br>
+Click [here](https://fnaf-p9rm.onrender.com/ps/) for FNAF Pizzeria Simulator!<br>
 
-Click [here](http://festive-foxx.github.io/fnaf-web/fnaf/ucn/) for FNAF UCN! <br>
+Click [here](https://fnaf-p9rm.onrender.com/ucn/) for FNAF UCN! <br>
 
-Click [here](http://festive-foxx.github.io/fnaf-web/fnaf/sl/) for FNAF Sister Location! <br>
+Click [here](https://fnaf-p9rm.onrender.com/sl/) for FNAF Sister Location! <br>
  <hr>
 
 NOT OFFICIAL FNAF PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH SCOTT CAWTHON.
