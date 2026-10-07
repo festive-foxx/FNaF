@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FNAF Browser Collection</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, sans-serif;
+      background: #09090b;
+      color: #f4f4f5;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top, rgba(59, 130, 246, 0.14), transparent 38%),
+        #09090b;
+    }
+    main {
+      width: min(900px, calc(100% - 2rem));
+      padding: 3rem 1.5rem;
+    }
+    h1 { margin-bottom: 0.5rem; font-size: clamp(2rem, 6vw, 4rem); }
+    p { color: #a1a1aa; }
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .games a {
+      display: block;
+      padding: 1rem;
+      border: 1px solid #27272a;
+      border-radius: 0.75rem;
+      color: #f4f4f5;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.03);
+      transition: 150ms ease;
+    }
+    .games a:hover, .games a:focus-visible {
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.12);
+      transform: translateY(-2px);
+      outline: none;
+    }
+    .games strong { display: block; margin-bottom: 0.35rem; }
+    .games span { color: #a1a1aa; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Five Nights at Freddy's</h1>
+    <p>Select a game to play in your browser.</p>
+
+    <nav class="games" aria-label="Game selection">
+      <a href="/1/"><strong>FNAF 1</strong><span>Five Nights at Freddy's</span></a>
+      <a href="/2/"><strong>FNAF 2</strong><span>Five Nights at Freddy's 2</span></a>
+      <a href="/3/"><strong>FNAF 3</strong><span>Five Nights at Freddy's 3</span></a>
+      <a href="/4/"><strong>FNAF 4</strong><span>Five Nights at Freddy's 4</span></a>
+      <a href="/4-halloween/"><strong>Halloween</strong><span>FNAF 4 Halloween</span></a>
+      <a href="/ps/"><strong>Pizzeria Simulator</strong><span>FNAF: Pizzeria Simulator</span></a>
+      <a href="/sl/"><strong>Sister Location</strong><span>FNAF: Sister Location</span></a>
+      <a href="/ucn/"><strong>Ultimate Custom Night</strong><span>FNAF: UCN</span></a>
+      <a href="/w/"><strong>FNAF World</strong><span>Five Nights at Freddy's World</span></a>
+    </nav>
+  </main>
+</body>
+</html>
