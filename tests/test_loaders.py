@@ -41,3 +41,6 @@ def test_game_stage_centers_canvas_in_viewport():
     assert "#game-stage" in styles
     assert "width: 100vw;" in styles
     assert "place-items: center;" in styles
+    assert "#game-stage > .MMFDiv" in styles
+    assert "width: fit-content !important;" in styles
+    assert "justify-self: center;" in styles
