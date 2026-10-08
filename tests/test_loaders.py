@@ -34,3 +34,10 @@ def test_game_pages_include_fullscreen_controls():
         assert 'id="fullscreen-button"' in html, f"{game}: missing fullscreen button"
         assert '../fullscreen.js' in html, f"{game}: missing fullscreen behavior"
         assert '../fullscreen.css' in html, f"{game}: missing fullscreen styles"
+
+
+def test_game_stage_centers_canvas_in_viewport():
+    styles = (ROOT / "fullscreen.css").read_text(encoding="utf-8")
+    assert "#game-stage" in styles
+    assert "width: 100vw;" in styles
+    assert "place-items: center;" in styles
