@@ -67,17 +67,20 @@ async function extract() {
   const files = Object.keys(zip.files).filter(name => !zip.files[name].dir);
   const totalFiles = files.length;
 
-  const next = async () => {
-    const file = files.shift();
-    if (!file) return;
+  
+  const workers = Array.from({ length: Math.min(MAX_CONCURRENT_DOWNLOADS, totalFiles) }, async () => {
+    while (files.length > 0) {
+      const file = files.shift();
+      if (!file) return;
 
-    const blob = await zip.files[file].async("blob");
-    map.set(file, URL.createObjectURL(blob));
-    updateProgress('extract', Math.floor(((totalFiles - files.length) / totalFiles) * 100));
-    await next();
-  };
+      const blob = await zip.files[file].async("blob");
+      map.set(file, URL.createObjectURL(blob));
+      updateProgress('extract', Math.floor(((totalFiles - files.length) / totalFiles) * 100));
+    }
+  });
 
-  await Promise.all(Array.from({ length: Math.min(MAX_CONCURRENT_DOWNLOADS, totalFiles) }, next));
+  await Promise.all(workers);
+
 }
 
 async function wedone() {
