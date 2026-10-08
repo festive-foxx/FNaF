@@ -11,13 +11,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="HandheldFriendly" content="true" />
     <title>Five Nights at Freddy's 3</title>
+    <link rel="stylesheet" href="../fullscreen.css">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+    <script src="../fullscreen.js" defer></script>
     <script src="main.js" defer></script>
 </head>
 
 <body>
-    <div style="display: inline-block; -webkit-user-select: none; text-align: left">
+    <div id="game-stage">
+        <button id="fullscreen-button" type="button" aria-label="Fullscreen">Fullscreen</button>
+        <span id="fullscreen-status" role="status" aria-live="polite"></span>
         <canvas id="MMFCanvas" width="1280" height="720"> Your browser does not support Canvas, Please try again. </canvas>
     </div>
     <div id="progress-container">

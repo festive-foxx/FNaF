@@ -25,3 +25,12 @@ def test_game_pages_use_single_script_bundle():
         html = (ROOT / game / "index.html").read_text(encoding="utf-8")
         scripts = re.findall(r'<script\b[^>]*src="([^"]+)"[^>]*>', html)
         assert scripts.count("main.js") == 1, f"{game}: duplicate main.js script"
+
+
+def test_game_pages_include_fullscreen_controls():
+    for game in GAMES:
+        html = (ROOT / game / "index.html").read_text(encoding="utf-8")
+        assert 'id="game-stage"' in html, f"{game}: missing fullscreen target"
+        assert 'id="fullscreen-button"' in html, f"{game}: missing fullscreen button"
+        assert '../fullscreen.js' in html, f"{game}: missing fullscreen behavior"
+        assert '../fullscreen.css' in html, f"{game}: missing fullscreen styles"
