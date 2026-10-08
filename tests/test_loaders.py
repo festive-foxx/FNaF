@@ -44,3 +44,9 @@ def test_game_stage_centers_canvas_in_viewport():
     assert "#game-stage > .MMFDiv" in styles
     assert "width: fit-content !important;" in styles
     assert "justify-self: center;" in styles
+
+
+def test_fnaf_world_tracks_standard_fullscreen_state():
+    runtime = (ROOT / "w" / "Runtime.js").read_text(encoding="utf-8")
+    assert "a.fullScreen=!!document.fullscreenElement;Lh(a)" in runtime
+    assert "document.jB" not in runtime

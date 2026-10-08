@@ -135,6 +135,7 @@ function getParts(file, start, end) {
     }
     return parts;
 }
+if (window.gameCanvasSupported) {
 Promise.all([
     mergeFiles(getParts("resources.zip", 1, parts))
 ]).then(([resources]) => {
@@ -147,3 +148,4 @@ Promise.all([
     };
     wedone();
 });
+}
