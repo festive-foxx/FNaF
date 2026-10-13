@@ -136,6 +136,12 @@ body {
     object-fit: contain;
 }
 
+#game-stage.runtime-fullscreen:fullscreen #MMFCanvas {
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
 #game-stage.fit-to-screen > .MMFDiv {
     display: grid !important;
     width: min(100vw, 177.7778vh) !important;

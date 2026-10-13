@@ -58,6 +58,15 @@ def test_fnaf_3_and_4_scale_to_viewport_without_distortion():
     assert "height: 100% !important;" in styles
 
 
+def test_fnaf_world_keeps_runtime_managed_fullscreen_sizing():
+    html = (ROOT / "w" / "index.html").read_text(encoding="utf-8")
+    styles = (ROOT / "fullscreen.css").read_text(encoding="utf-8")
+    assert 'id="game-stage" class="runtime-fullscreen"' in html
+    assert "#game-stage.runtime-fullscreen:fullscreen #MMFCanvas" in styles
+    assert "width: auto !important;" in styles
+    assert "height: auto !important;" in styles
+
+
 def test_fullscreen_button_is_positioned_in_top_left():
     styles = (ROOT / "fullscreen.css").read_text(encoding="utf-8")
     button_styles = styles.split("#fullscreen-button {", 1)[1].split("}", 1)[0]
