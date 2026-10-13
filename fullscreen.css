@@ -78,7 +78,7 @@ body {
     position: absolute;
     z-index: 2;
     top: 12px;
-    right: 12px;
+    left: 12px;
     padding: 10px 14px;
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 6px;

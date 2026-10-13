@@ -46,6 +46,14 @@ def test_game_stage_centers_canvas_in_viewport():
     assert "justify-self: center;" in styles
 
 
+def test_fullscreen_button_is_positioned_in_top_left():
+    styles = (ROOT / "fullscreen.css").read_text(encoding="utf-8")
+    button_styles = styles.split("#fullscreen-button {", 1)[1].split("}", 1)[0]
+    assert "top: 12px;" in button_styles
+    assert "left: 12px;" in button_styles
+    assert "right:" not in button_styles
+
+
 def test_fnaf_world_tracks_standard_fullscreen_state():
     runtime = (ROOT / "w" / "Runtime.js").read_text(encoding="utf-8")
     assert "a.fullScreen=!!document.fullscreenElement;Lh(a)" in runtime
