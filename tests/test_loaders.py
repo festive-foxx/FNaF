@@ -46,6 +46,18 @@ def test_game_stage_centers_canvas_in_viewport():
     assert "justify-self: center;" in styles
 
 
+def test_fnaf_3_and_4_scale_to_viewport_without_distortion():
+    styles = (ROOT / "fullscreen.css").read_text(encoding="utf-8")
+    for game in ("3", "4"):
+        html = (ROOT / game / "index.html").read_text(encoding="utf-8")
+        assert 'id="game-stage" class="fit-to-screen"' in html
+
+    assert "width: min(100vw, 177.7778vh) !important;" in styles
+    assert "height: min(100vh, 56.25vw) !important;" in styles
+    assert "width: 100% !important;" in styles
+    assert "height: 100% !important;" in styles
+
+
 def test_fullscreen_button_is_positioned_in_top_left():
     styles = (ROOT / "fullscreen.css").read_text(encoding="utf-8")
     button_styles = styles.split("#fullscreen-button {", 1)[1].split("}", 1)[0]
