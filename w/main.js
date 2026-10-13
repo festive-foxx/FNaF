@@ -83,8 +83,14 @@ async function extract() {
 
 }
 
-async function wedone() {
-  await extract();
+async function wedone(resources) {
+  try {
+    await extract();
+  } finally {
+    window.fetch = originalFetch;
+    URL.revokeObjectURL(resources);
+  }
+
   await intercept();
 
   const script = document.createElement('script');
@@ -148,6 +154,6 @@ Promise.all([
             return originalFetch(url, ...args);
         }
     };
-    wedone();
+    wedone(resources);
 });
 }

@@ -79,3 +79,11 @@ def test_fnaf_world_tracks_standard_fullscreen_state():
     runtime = (ROOT / "w" / "Runtime.js").read_text(encoding="utf-8")
     assert "a.fullScreen=!!document.fullscreenElement;Lh(a)" in runtime
     assert "document.jB" not in runtime
+
+
+def test_fnaf_world_releases_archive_after_extraction():
+    main = (ROOT / "w" / "main.js").read_text(encoding="utf-8")
+    assert "async function wedone(resources)" in main
+    assert "window.fetch = originalFetch;" in main
+    assert "URL.revokeObjectURL(resources);" in main
+    assert "wedone(resources);" in main
