@@ -1,26 +1,21 @@
-# Five Night's at Freddys HTML
- We got fnaf 1, 2, 3, 4. Pizzeria simulator, fnaf world, Ultimate Custom Night, and Sister Location!<br>
-<hr>
+# Five Nights at Freddy's HTML
 
-# Demos
-Click [here](https://fnaf-p9rm.onrender.com/1/) for FNaF 1!<br>
+Play the browser games from the [game collection](./):
 
-Click [here](https://fnaf-p9rm.onrender.com/2/) for FNaF 2!<br>
+- [Five Nights at Freddy's](./1/)
+- [Five Nights at Freddy's 2](./2/)
+- [Five Nights at Freddy's 3](./3/)
+- [Five Nights at Freddy's 4](./4/)
+- [FNAF 4 Halloween](./4-halloween/)
+- [Pizzeria Simulator](./ps/)
+- [Sister Location](./sl/)
+- [Ultimate Custom Night](./ucn/)
+- [FNAF World](./w/)
 
-Click [here](https://fnaf-p9rm.onrender.com/3/) for FNaF 3!<br>
+## GitHub Pages
 
-Click [here](https://fnaf-p9rm.onrender.com/4/) for FNaF 4!<br>
+The site is deployed to GitHub Pages by the [static content workflow](./.github/workflows/static.yml) whenever changes are pushed to `main`. In the repository's Pages settings, select **GitHub Actions** as the deployment source.
 
-Click [here](https://fnaf-p9rm.onrender.com/w/) for FNaF World!<br>
+NOT AN OFFICIAL FNAF PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH SCOTT CAWTHON.
 
-Click [here](https://fnaf-p9rm.onrender.com/ps/) for FNaF Pizzeria Simulator!<br>
-
-Click [here](https://fnaf-p9rm.onrender.com/ucn/) for FNaF UCN! <br>
-
-Click [here](https://fnaf-p9rm.onrender.com/sl/) for FNaF Sister Location! <br>
- <hr>
-
-NOT OFFICIAL FNAF PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH SCOTT CAWTHON.
-
-Original at https://github.com/irv77/hd_fnaf 
-
+Original at https://github.com/irv77/hd_fnaf
