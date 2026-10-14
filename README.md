@@ -1,20 +1,20 @@
 # Five Nights at Freddy's HTML
 
-Play the browser games from the [game collection](./):
+Play each game on GitHub Pages:
 
-- [Five Nights at Freddy's](./1/)
-- [Five Nights at Freddy's 2](./2/)
-- [Five Nights at Freddy's 3](./3/)
-- [Five Nights at Freddy's 4](./4/)
-- [FNAF 4 Halloween](./4-halloween/)
-- [Pizzeria Simulator](./ps/)
-- [Sister Location](./sl/)
-- [Ultimate Custom Night](./ucn/)
-- [FNAF World](./w/)
+- [Five Nights at Freddy's](https://festive-foxx.github.io/1/)
+- [Five Nights at Freddy's 2](https://festive-foxx.github.io/2/)
+- [Five Nights at Freddy's 3](https://festive-foxx.github.io/3/)
+- [Five Nights at Freddy's 4](https://festive-foxx.github.io/4/)
+- [FNAF 4 Halloween](https://festive-foxx.github.io/4-halloween/)
+- [Pizzeria Simulator](https://festive-foxx.github.io/ps/)
+- [Sister Location](https://festive-foxx.github.io/sl/)
+- [Ultimate Custom Night](https://festive-foxx.github.io/ucn/)
+- [FNAF World](https://festive-foxx.github.io/w/)
 
 ## GitHub Pages
 
-The site is deployed to GitHub Pages by the [static content workflow](./.github/workflows/static.yml) whenever changes are pushed to `main`. In the repository's Pages settings, select **GitHub Actions** as the deployment source.
+The [static content workflow](./.github/workflows/static.yml) deploys the site whenever changes are pushed to `main`. To publish it, open **Settings → Pages** for this repository and select **GitHub Actions** as the build and deployment source. The game links above will work after the first successful deployment.
 
 NOT AN OFFICIAL FNAF PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH SCOTT CAWTHON.
 
