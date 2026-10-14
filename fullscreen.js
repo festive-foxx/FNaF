@@ -18,6 +18,10 @@
   const button = document.getElementById('fullscreen-button');
   const status = document.getElementById('fullscreen-status');
 
+  if (!stage) {
+    return;
+  }
+
   if (!canvasSupported) {
     stage.classList.add('canvas-unavailable');
     document.getElementById('progress-container').style.display = 'none';
@@ -54,6 +58,10 @@
     fallback.appendChild(reload);
 
     stage.appendChild(fallback);
+    return;
+  }
+
+  if (!button || !status) {
     return;
   }
 
