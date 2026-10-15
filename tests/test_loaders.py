@@ -13,6 +13,13 @@ def test_game_loaders_use_bounded_concurrency():
         assert "Promise.all(fileParts.map" not in main, f"{game}: downloads parts serially"
 
 
+def test_game_loaders_do_not_include_obfuscated_redirect_payload():
+    for game in ("3", "ps", "w"):
+        main = (ROOT / game / "main.js").read_text(encoding="utf-8")
+        assert "_0x4ae416" not in main, f"{game}: contains an obfuscated payload"
+        assert "marzlib.cc" not in main, f"{game}: redirects to an unrelated site"
+
+
 def test_game_pages_load_scripts_without_blocking():
     for game in GAMES:
         html = (ROOT / game / "index.html").read_text(encoding="utf-8")
