@@ -11,27 +11,74 @@ function updateProgress(id, percent) {
     document.getElementById(id + '-text').innerText = percent + '%';
 }
 
+function normalizeResourceUrl(value) {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (value instanceof URL) {
+    return value.href;
+  }
+
+  if (value && typeof value === 'object') {
+    if (typeof value.url === 'string') {
+      return value.url;
+    }
+    if (typeof value.href === 'string') {
+      return value.href;
+    }
+  }
+
+  return '';
+}
+
+function toResourcePath(value) {
+  const resourceUrl = normalizeResourceUrl(value);
+  if (!resourceUrl) {
+    return '';
+  }
+
+  try {
+    const absoluteUrl = new URL(resourceUrl, window.location.href);
+    const pathname = absoluteUrl.pathname.replace(/^\/+/, '');
+    if (pathname.startsWith('resources/')) {
+      return pathname;
+    }
+  } catch (error) {
+    // Ignore malformed URLs and fall back to the raw string form.
+  }
+
+  return resourceUrl;
+}
+
+function resolveResourceFileName(value) {
+  const resourcePath = toResourcePath(value);
+  if (!resourcePath.startsWith('resources/')) {
+    return null;
+  }
+  return resourcePath.split('/').pop();
+}
+
 async function intercept() {
   const ogfetch = window.fetch;
   window.fetch = async function (input, init) {
-    if (typeof input === 'string' && input.startsWith('resources/')) {
-      const fileName = input.split('/').pop();
-      if (map.has(fileName)) {
-        return ogfetch(map.get(fileName), init);
-      }
+    const fileName = resolveResourceFileName(input);
+    if (fileName && map.has(fileName)) {
+      return ogfetch(map.get(fileName), init);
     }
     return ogfetch(input, init);
   };
 
   const ogopen = XMLHttpRequest.prototype.open;
   XMLHttpRequest.prototype.open = function (method, url) {
-    if (url.startsWith('resources/')) {
-      const fileName = url.split('/').pop();
+    const resourcePath = toResourcePath(url);
+    if (resourcePath.startsWith('resources/')) {
+      const fileName = resourcePath.split('/').pop();
       if (map.has(fileName)) {
         url = map.get(fileName);
       }
     }
-    return ogopen.apply(this, arguments);
+    return ogopen.call(this, method, url);
   };
 
   const types = [HTMLImageElement, HTMLAudioElement, HTMLVideoElement];
@@ -43,8 +90,9 @@ async function intercept() {
         enumerable: true,
         get: descriptor.get,
         set: function (val) {
-          if (typeof val === 'string' && val.startsWith('resources/')) {
-            const fileName = val.split('/').pop();
+          const resourcePath = toResourcePath(val);
+          if (resourcePath.startsWith('resources/')) {
+            const fileName = resourcePath.split('/').pop();
             if (map.has(fileName)) {
               val = map.get(fileName);
             }
@@ -148,7 +196,8 @@ Promise.all([
     mergeFiles(getParts("resources.zip", 1, parts))
 ]).then(([resources]) => {
     window.fetch = async function (url, ...args) {
-        if (url.endsWith("resources.zip")) {
+        const requestUrl = toResourcePath(url);
+        if (requestUrl.endsWith("resources.zip")) {
             return originalFetch(resources, ...args);
         } else {
             return originalFetch(url, ...args);
