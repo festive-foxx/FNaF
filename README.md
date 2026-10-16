@@ -12,10 +12,6 @@ Play each game on GitHub Pages:
 - [Ultimate Custom Night](https://festive-foxx.github.io/FNaF/ucn/)
 - [FNAF World](https://festive-foxx.github.io/FNaF/w/)
 
-## GitHub Pages
-
-The [static content workflow](./.github/workflows/static.yml) deploys the site whenever changes are pushed to `main`. To publish it, open **Settings → Pages** for this repository and select **GitHub Actions** as the build and deployment source. The game links above will work after the first successful deployment.
-
 NOT AN OFFICIAL FNAF PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH SCOTT CAWTHON.
 
 Original at https://github.com/irv77/hd_fnaf
