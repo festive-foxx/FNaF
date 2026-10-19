@@ -23,8 +23,3 @@ Click [here](https://genizy.github.io/fnaf/sl/) for FNAF Sister Location! <br>
 NOT OFFICIAL FNAF PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH SCOTT CAWTHON.
 
 Original at https://github.com/irv77/hd_fnaf 
-## My edits:
-- Fixed Pizza Simulator
-- Fixed Sister Location
-- Make all games load faster
-- Make all games load in 1 file
