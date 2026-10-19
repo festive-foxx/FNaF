@@ -40,6 +40,10 @@ function toResourcePath(value) {
 
   try {
     const absoluteUrl = new URL(resourceUrl, window.location.href);
+    const resourceIndex = absoluteUrl.pathname.lastIndexOf('/resources/');
+    if (resourceIndex !== -1) {
+      return absoluteUrl.pathname.slice(resourceIndex + 1);
+    }
     const pathname = absoluteUrl.pathname.replace(/^\/+/, '');
     if (pathname.startsWith('resources/')) {
       return pathname;
